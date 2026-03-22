@@ -14,18 +14,30 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        Carta carta1 = new Carta();
-        carta1.setNombre("Dragón de Fuego");
-        carta1.setEdicion("Primera Era");
-        carta1.setTipo("Criatura");
-        carta1.setRareza("Rara");
-        cartaRepository.save(carta1);
 
-        Carta carta2 = new Carta();
-        carta2.setNombre("Guerrero Mapuche");
-        carta2.setEdicion("Imperio");
-        carta2.setTipo("Guerrero");
-        carta2.setRareza("Común");
-        cartaRepository.save(carta2);
+        agregarCarta("Kalki", "Primera Era", "Avatar", "Rara");
+        agregarCarta("Anubis", "Primera Era", "Dios", "Épica");
+        agregarCarta("Odín", "Primera Era", "Dios", "Épica");
+        agregarCarta("Medusa", "Primera Era", "Criatura", "Rara");
+        agregarCarta("Minotauro", "Primera Era", "Criatura", "Común");
+        agregarCarta("Guerrero Mapuche", "Imperio", "Guerrero", "Común");
+        agregarCarta("Dragón de Fuego", "Imperio", "Criatura", "Rara");
+        agregarCarta("Machi", "Imperio", "Hechicero", "Poco Común");
+        agregarCarta("Cóndor Sagrado", "Imperio", "Criatura", "Poco Común");
+        agregarCarta("Thor", "Ragnarok", "Dios", "Épica");
+        agregarCarta("Loki", "Ragnarok", "Dios", "Rara");
+        agregarCarta("Fenrir", "Ragnarok", "Criatura", "Rara");
+        agregarCarta("Zeus", "Olimpo", "Dios", "Épica");
+        agregarCarta("Atenea", "Olimpo", "Diosa", "Rara");
+        agregarCarta("Pegaso", "Olimpo", "Criatura", "Poco Común");
+    }
+
+    private void agregarCarta(String nombre, String edicion, String tipo, String rareza) {
+        Carta carta = new Carta();
+        carta.setNombre(nombre);
+        carta.setEdicion(edicion);
+        carta.setTipo(tipo);
+        carta.setRareza(rareza);
+        cartaRepository.save(carta);
     }
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${carta.nombre}">Detalle Carta</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
+    <style>
+        body { background: #1a0f00; min-height: 100vh; padding: 2rem; font-family: 'IM Fell English', serif; color: #d4a843; }
+        .titulo { font-family: 'Cinzel', serif; font-size: 28px; color: #d4a843; text-align: center; letter-spacing: 3px; text-shadow: 0 0 15px #8b6914; margin-bottom: 2rem; }
+        .detalle-card { max-width: 400px; margin: 0 auto; background: linear-gradient(160deg, #2e1c0a, #1a0f00); border: 1px solid #5a3e1b; border-radius: 8px; padding: 2rem; }
+        .carta-img { width: 100%; height: 250px; background: #2e1c0a; border: 1px solid #5a3e1b; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 80px; margin-bottom: 1.5rem; }
+        .carta-nombre { font-family: 'Cinzel', serif; font-size: 22px; color: #d4a843; text-align: center; margin-bottom: 1rem; }
+        .divider { border: none; border-top: 1px solid #5a3e1b; margin: 1rem 0; }
+        .dato { display: flex; justify-content: space-between; padding: 0.4rem 0; font-size: 15px; }
+        .dato-label { color: #8b6914; }
+        .dato-valor { color: #d4a843; }
+        .badge { font-size: 11px; padding: 2px 10px; border-radius: 3px; letter-spacing: 1px; }
+        .badge-edicion { background: #1a1a00; color: #d4c43a; border: 1px solid #d4c43a44; }
+        .badge-tipo    { background: #3d1a00; color: #e8854a; border: 1px solid #e8854a44; }
+        .badge-rareza  { background: #1a003d; color: #b04ae8; border: 1px solid #b04ae844; }
+        .btn-volver { display: block; text-align: center; margin-top: 1.5rem; color: #8b6914; text-decoration: none; font-family: 'Cinzel', serif; font-size: 13px; letter-spacing: 2px; border: 1px solid #5a3e1b; padding: 8px; border-radius: 6px; transition: border-color 0.2s; }
+        .btn-volver:hover { border-color: #d4a843; color: #d4a843; }
+    </style>
+</head>
+<body>
+<h1 class="titulo">⚔ Mitos y Leyendas ⚔</h1>
+
+<div class="detalle-card">
+    <div class="carta-img">🃏</div>
+    <div class="carta-nombre" th:text="${carta.nombre}"></div>
+    <hr class="divider">
+    <div class="dato">
+        <span class="dato-label">Edición</span>
+        <span class="badge badge-edicion" th:text="${carta.edicion}"></span>
+    </div>
+    <div class="dato">
+        <span class="dato-label">Tipo</span>
+        <span class="badge badge-tipo" th:text="${carta.tipo}"></span>
+    </div>
+    <div class="dato">
+        <span class="dato-label">Rareza</span>
+        <span class="badge badge-rareza" th:text="${carta.rareza}"></span>
+    </div>
+    <a href="/cartas" class="btn-volver">← Volver al Catálogo</a>
+</div>
+</body>
+</html>

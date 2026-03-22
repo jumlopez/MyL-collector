@@ -1,19 +1,68 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <title>Cartas MyL</title>
+    <title>MyL Collector</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=IM+Fell+English&display=swap" rel="stylesheet">
+    <style>
+
+        .rareza-comun    { border-color: #555 !important; }
+        .rareza-poco     { border-color: #1a7a3a !important; }
+        .rareza-rara     { border-color: #1a4a9a !important; }
+        .rareza-epica    { border-color: #d4a843 !important; box-shadow: 0 0 10px #d4a84355; }
+
+        body { background: #1a0f00; min-height: 100vh; padding: 2rem; font-family: 'IM Fell English', serif; }
+        .myl-title { text-align: center; font-family: 'Cinzel', serif; font-size: 28px; color: #d4a843; letter-spacing: 3px; margin-bottom: 0.3rem; text-shadow: 0 0 20px #8b6914; }
+        .myl-subtitle { text-align: center; font-size: 13px; color: #8b6914; letter-spacing: 5px; margin-bottom: 2rem; }
+        .myl-divider { border: none; border-top: 1px solid #5a3e1b; margin: 0 auto 2rem; max-width: 400px; }
+        .myl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+        .myl-card { background: linear-gradient(160deg, #2e1c0a 0%, #1a0f00 100%); border: 1px solid #5a3e1b; border-radius: 8px; padding: 1rem; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+        .myl-card:hover { transform: translateY(-4px); border-color: #d4a843; }
+        .myl-img-placeholder { width: 100%; height: 120px; background: #2e1c0a; border: 1px solid #5a3e1b; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 36px; margin-bottom: 0.75rem; }
+        .myl-card-name { font-family: 'Cinzel', serif; font-size: 14px; color: #d4a843; margin-bottom: 0.5rem; }
+        .myl-badges { display: flex; flex-wrap: wrap; gap: 4px; }
+        .badge { font-size: 10px; padding: 2px 8px; border-radius: 3px; letter-spacing: 1px; font-family: sans-serif; }
+        .badge-edicion { background: #1a1a00; color: #d4c43a; border: 1px solid #d4c43a44; }
+        .badge-tipo    { background: #3d1a00; color: #e8854a; border: 1px solid #e8854a44; }
+        .badge-rareza  { background: #1a003d; color: #b04ae8; border: 1px solid #b04ae844; }
+    </style>
 </head>
 <body>
-<h1>Catálogo de Cartas Mitos y Leyendas</h1>
-
-<div th:if="${cartas.empty}">
-    <p>No hay cartas todavía</p>
-</div>
-
-<div th:each="carta : ${cartas}">
-    <h3 th:text="${carta.nombre}"></h3>
-    <p th:text="${carta.edicion}"></p>
-    <p th:text="${carta.tipo}"></p>
+<h1 class="myl-title">⚔ Mitos y Leyendas ⚔</h1>
+<p class="myl-subtitle">CATÁLOGO DE CARTAS</p>
+<hr class="myl-divider">
+<form action="/cartas" method="get" style="max-width: 500px; margin: 0 auto 2rem;">
+    <div style="display: flex; gap: 8px;">
+        <input
+                type="text"
+                name="buscar"
+                th:value="${buscar}"
+                placeholder="Buscar carta..."
+                style="flex: 1; background: #2e1c0a; border: 1px solid #5a3e1b; color: #d4a843; padding: 8px 12px; border-radius: 6px; font-family: 'IM Fell English', serif; outline: none;">
+        <button
+                type="submit"
+                style="background: #2e1c0a; border: 1px solid #d4a843; color: #d4a843; padding: 8px 16px; border-radius: 6px; cursor: pointer; font-family: 'Cinzel', serif; letter-spacing: 1px;">
+            Buscar
+        </button>
+    </div>
+</form>
+<div class="myl-grid">
+    <a th:each="carta : ${cartas}"
+       th:href="@{/cartas/{id}(id=${carta.id})}"
+       style="text-decoration: none;">
+        <div th:classappend="${carta.rareza == 'Épica'} ? 'rareza-epica' :
+                             (${carta.rareza == 'Rara'} ? 'rareza-rara' :
+                             (${carta.rareza == 'Poco Común'} ? 'rareza-poco' :
+                             'rareza-comun'))"
+             class="myl-card">
+            <div class="myl-img-placeholder">🃏</div>
+            <div class="myl-card-name" th:text="${carta.nombre}"></div>
+            <div class="myl-badges">
+                <span class="badge badge-edicion" th:text="${carta.edicion}"></span>
+                <span class="badge badge-tipo"    th:text="${carta.tipo}"></span>
+                <span class="badge badge-rareza"  th:text="${carta.rareza}"></span>
+            </div>
+        </div>
+    </a>
 </div>
 </body>
 </html>
