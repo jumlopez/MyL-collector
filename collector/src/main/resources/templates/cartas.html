@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cartas MyL</title>
+</head>
+<body>
+<h1>Catálogo de Cartas Mitos y Leyendas</h1>
+
+<div th:if="${cartas.empty}">
+    <p>No hay cartas todavía</p>
+</div>
+
+<div th:each="carta : ${cartas}">
+    <h3 th:text="${carta.nombre}"></h3>
+    <p th:text="${carta.edicion}"></p>
+    <p th:text="${carta.tipo}"></p>
+</div>
+</body>
+</html>
